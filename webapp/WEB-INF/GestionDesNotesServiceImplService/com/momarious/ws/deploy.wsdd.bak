@@ -1,0 +1,87 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from GestionDesNotesServiceImplService WSDL service -->
+
+  <service name="GestionDesNotesServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://ws.momarious.com"/>
+      <parameter name="wsdlServiceElement" value="GestionDesNotesServiceImplService"/>
+      <parameter name="schemaQualified" value="http://ws.momarious.com,http://model.momarious.com"/>
+      <parameter name="wsdlServicePort" value="GestionDesNotesServiceImpl"/>
+      <parameter name="className" value="com.momarious.ws.GestionDesNotesServiceImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="GestionDesNotesServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="login" qname="operNS:login" xmlns:operNS="http://ws.momarious.com" returnQName="retNS:loginReturn" xmlns:retNS="http://ws.momarious.com" returnType="rtns:boolean" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:email" xmlns:pns="http://ws.momarious.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:password" xmlns:pns="http://ws.momarious.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getListEtudiants" qname="operNS:getListEtudiants" xmlns:operNS="http://ws.momarious.com" returnQName="retNS:getListEtudiantsReturn" xmlns:retNS="http://ws.momarious.com" returnType="rtns:Etudiant" xmlns:rtns="http://model.momarious.com" soapAction="" >
+        <parameter qname="pns:codeClasse" xmlns:pns="http://ws.momarious.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getEtudiantByName" qname="operNS:getEtudiantByName" xmlns:operNS="http://ws.momarious.com" returnQName="retNS:getEtudiantByNameReturn" xmlns:retNS="http://ws.momarious.com" returnType="rtns:Etudiant" xmlns:rtns="http://model.momarious.com" soapAction="" >
+        <parameter qname="pns:nom" xmlns:pns="http://ws.momarious.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:prenom" xmlns:pns="http://ws.momarious.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getListMatieresByEtud" qname="operNS:getListMatieresByEtud" xmlns:operNS="http://ws.momarious.com" returnQName="retNS:getListMatieresByEtudReturn" xmlns:retNS="http://ws.momarious.com" returnType="rtns:Matiere" xmlns:rtns="http://model.momarious.com" soapAction="" >
+        <parameter qname="pns:codeEtud" xmlns:pns="http://ws.momarious.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getListEvaluationsByEtudAndMat" qname="operNS:getListEvaluationsByEtudAndMat" xmlns:operNS="http://ws.momarious.com" returnQName="retNS:getListEvaluationsByEtudAndMatReturn" xmlns:retNS="http://ws.momarious.com" returnType="rtns:Evaluation" xmlns:rtns="http://model.momarious.com" soapAction="" >
+        <parameter qname="pns:codeMat" xmlns:pns="http://ws.momarious.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:codeEtud" xmlns:pns="http://ws.momarious.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getMatiereByEtudAndMat" qname="operNS:getMatiereByEtudAndMat" xmlns:operNS="http://ws.momarious.com" returnQName="retNS:getMatiereByEtudAndMatReturn" xmlns:retNS="http://ws.momarious.com" returnType="rtns:Matiere" xmlns:rtns="http://model.momarious.com" soapAction="" >
+        <parameter qname="pns:codeEtud" xmlns:pns="http://ws.momarious.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:codeMat" xmlns:pns="http://ws.momarious.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="getListMatieresByEtud getListEtudiants getEtudiantByName login getListEvaluationsByEtudAndMat getMatiereByEtudAndMat"/>
+
+      <arrayMapping
+        xmlns:ns="http://ws.momarious.com"
+        qname="ns:ArrayOf_tns1_Evaluation"
+        type="java:com.momarious.model.Evaluation[]"
+        innerType="cmp-ns:Evaluation" xmlns:cmp-ns="http://model.momarious.com"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.momarious.com"
+        qname="ns:Classe"
+        type="java:com.momarious.model.Classe"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.momarious.com"
+        qname="ns:Etudiant"
+        type="java:com.momarious.model.Etudiant"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.momarious.com"
+        qname="ns:Evaluation"
+        type="java:com.momarious.model.Evaluation"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+      <typeMapping
+        xmlns:ns="http://model.momarious.com"
+        qname="ns:Matiere"
+        type="java:com.momarious.model.Matiere"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>

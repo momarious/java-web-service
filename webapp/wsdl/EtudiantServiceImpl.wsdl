@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://ws.momarious.com" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://ws.momarious.com" xmlns:intf="http://ws.momarious.com" xmlns:tns1="http://model.momarious.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://ws.momarious.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.momarious.com"/>
+   <element name="login">
+    <complexType>
+     <sequence>
+      <element name="email" type="xsd:string"/>
+      <element name="password" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="loginResponse">
+    <complexType>
+     <sequence>
+      <element name="loginReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getListEtudiants">
+    <complexType>
+     <sequence>
+      <element name="codeClasse" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getListEtudiantsResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getListEtudiantsReturn" type="tns1:Etudiant"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getListEvaluationsByEtudAndMat">
+    <complexType>
+     <sequence>
+      <element name="codeMat" type="xsd:int"/>
+      <element name="codeEtud" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getListEvaluationsByEtudAndMatResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getListEvaluationsByEtudAndMatReturn" type="tns1:Evaluation"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getListMatieresByEtud">
+    <complexType>
+     <sequence>
+      <element name="codeEtud" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getListMatieresByEtudResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="getListMatieresByEtudReturn" type="tns1:Matiere"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns1_Evaluation">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns1:Evaluation"/>
+    </sequence>
+   </complexType>
+   <element name="getEtudiantByName">
+    <complexType>
+     <sequence>
+      <element name="nom" type="xsd:string"/>
+      <element name="prenom" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getEtudiantByNameResponse">
+    <complexType>
+     <sequence>
+      <element name="getEtudiantByNameReturn" type="tns1:Etudiant"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMatiereByEtudAndMat">
+    <complexType>
+     <sequence>
+      <element name="codeEtud" type="xsd:int"/>
+      <element name="codeMat" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getMatiereByEtudAndMatResponse">
+    <complexType>
+     <sequence>
+      <element name="getMatiereByEtudAndMatReturn" type="tns1:Matiere"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model.momarious.com" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://ws.momarious.com"/>
+   <complexType name="Classe">
+    <sequence>
+     <element name="codeClasse" type="xsd:int"/>
+     <element name="niveau" nillable="true" type="xsd:string"/>
+     <element name="nom" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Etudiant">
+    <sequence>
+     <element name="classe" nillable="true" type="tns1:Classe"/>
+     <element name="codeEtudiant" type="xsd:int"/>
+     <element name="dateDeNaissance" nillable="true" type="xsd:dateTime"/>
+     <element name="nom" nillable="true" type="xsd:string"/>
+     <element name="prenom" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Evaluation">
+    <sequence>
+     <element name="codeEtudiant" type="xsd:int"/>
+     <element name="codeMatiere" type="xsd:int"/>
+     <element name="dateEvaluation" nillable="true" type="xsd:dateTime"/>
+     <element name="note" type="xsd:float"/>
+     <element name="type" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="Matiere">
+    <sequence>
+     <element name="codeMatiere" type="xsd:int"/>
+     <element name="description" nillable="true" type="xsd:string"/>
+     <element name="devoir" type="xsd:float"/>
+     <element name="evaluations" nillable="true" type="impl:ArrayOf_tns1_Evaluation"/>
+     <element name="exam" type="xsd:float"/>
+     <element name="libelle" nillable="true" type="xsd:string"/>
+     <element name="moyenne" type="xsd:float"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getListEvaluationsByEtudAndMatRequest">
+
+      <wsdl:part element="impl:getListEvaluationsByEtudAndMat" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getListMatieresByEtudResponse">
+
+      <wsdl:part element="impl:getListMatieresByEtudResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginRequest">
+
+      <wsdl:part element="impl:login" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEtudiantByNameRequest">
+
+      <wsdl:part element="impl:getEtudiantByName" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMatiereByEtudAndMatResponse">
+
+      <wsdl:part element="impl:getMatiereByEtudAndMatResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getListEvaluationsByEtudAndMatResponse">
+
+      <wsdl:part element="impl:getListEvaluationsByEtudAndMatResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getListMatieresByEtudRequest">
+
+      <wsdl:part element="impl:getListMatieresByEtud" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="loginResponse">
+
+      <wsdl:part element="impl:loginResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getMatiereByEtudAndMatRequest">
+
+      <wsdl:part element="impl:getMatiereByEtudAndMat" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getListEtudiantsRequest">
+
+      <wsdl:part element="impl:getListEtudiants" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getListEtudiantsResponse">
+
+      <wsdl:part element="impl:getListEtudiantsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getEtudiantByNameResponse">
+
+      <wsdl:part element="impl:getEtudiantByNameResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="EtudiantServiceImpl">
+
+      <wsdl:operation name="login">
+
+         <wsdl:input message="impl:loginRequest" name="loginRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:loginResponse" name="loginResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getListEtudiants">
+
+         <wsdl:input message="impl:getListEtudiantsRequest" name="getListEtudiantsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getListEtudiantsResponse" name="getListEtudiantsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getListEvaluationsByEtudAndMat">
+
+         <wsdl:input message="impl:getListEvaluationsByEtudAndMatRequest" name="getListEvaluationsByEtudAndMatRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getListEvaluationsByEtudAndMatResponse" name="getListEvaluationsByEtudAndMatResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getListMatieresByEtud">
+
+         <wsdl:input message="impl:getListMatieresByEtudRequest" name="getListMatieresByEtudRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getListMatieresByEtudResponse" name="getListMatieresByEtudResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEtudiantByName">
+
+         <wsdl:input message="impl:getEtudiantByNameRequest" name="getEtudiantByNameRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getEtudiantByNameResponse" name="getEtudiantByNameResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMatiereByEtudAndMat">
+
+         <wsdl:input message="impl:getMatiereByEtudAndMatRequest" name="getMatiereByEtudAndMatRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getMatiereByEtudAndMatResponse" name="getMatiereByEtudAndMatResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="EtudiantServiceImplSoapBinding" type="impl:EtudiantServiceImpl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="login">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="loginRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="loginResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getListEtudiants">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getListEtudiantsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getListEtudiantsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getListEvaluationsByEtudAndMat">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getListEvaluationsByEtudAndMatRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getListEvaluationsByEtudAndMatResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getListMatieresByEtud">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getListMatieresByEtudRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getListMatieresByEtudResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getEtudiantByName">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getEtudiantByNameRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getEtudiantByNameResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getMatiereByEtudAndMat">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getMatiereByEtudAndMatRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getMatiereByEtudAndMatResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="EtudiantServiceImplService">
+
+      <wsdl:port binding="impl:EtudiantServiceImplSoapBinding" name="EtudiantServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/GestionDesNotes/services/EtudiantServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

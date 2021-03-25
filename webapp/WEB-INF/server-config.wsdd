@@ -1,0 +1,126 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="C:\Users\Momarious\workspace2\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\GestionDesNotes\WEB-INF\attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="GestionDesNotesServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+  <ns2:operation name="login" qname="ns1:login" returnQName="ns1:loginReturn" returnType="xsd:boolean" soapAction="" xmlns:ns1="http://ws.momarious.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://xml.apache.org/axis/wsdd/">
+   <ns2:parameter qname="ns1:email" type="xsd:string"/>
+   <ns2:parameter qname="ns1:password" type="xsd:string"/>
+  </ns2:operation>
+  <ns1:operation name="getListEtudiants" qname="ns2:getListEtudiants" returnQName="ns2:getListEtudiantsReturn" returnType="ns3:Etudiant" soapAction="" xmlns:ns2="http://ws.momarious.com" xmlns:ns3="http://model.momarious.com">
+   <ns1:parameter qname="ns2:codeClasse" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getEtudiantByName" qname="ns4:getEtudiantByName" returnQName="ns4:getEtudiantByNameReturn" returnType="ns5:Etudiant" soapAction="" xmlns:ns4="http://ws.momarious.com" xmlns:ns5="http://model.momarious.com">
+   <ns1:parameter qname="ns4:nom" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns4:prenom" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getListMatieresByEtud" qname="ns6:getListMatieresByEtud" returnQName="ns6:getListMatieresByEtudReturn" returnType="ns7:Matiere" soapAction="" xmlns:ns6="http://ws.momarious.com" xmlns:ns7="http://model.momarious.com">
+   <ns1:parameter qname="ns6:codeEtud" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getListEvaluationsByEtudAndMat" qname="ns8:getListEvaluationsByEtudAndMat" returnQName="ns8:getListEvaluationsByEtudAndMatReturn" returnType="ns9:Evaluation" soapAction="" xmlns:ns8="http://ws.momarious.com" xmlns:ns9="http://model.momarious.com">
+   <ns1:parameter qname="ns8:codeMat" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns8:codeEtud" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getMatiereByEtudAndMat" qname="ns10:getMatiereByEtudAndMat" returnQName="ns10:getMatiereByEtudAndMatReturn" returnType="ns11:Matiere" soapAction="" xmlns:ns10="http://ws.momarious.com" xmlns:ns11="http://model.momarious.com">
+   <ns1:parameter qname="ns10:codeEtud" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns10:codeMat" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getListMatieresByEtud getListEtudiants getEtudiantByName login getListEvaluationsByEtudAndMat getMatiereByEtudAndMat"/>
+  <ns1:parameter name="wsdlPortType" value="GestionDesNotesServiceImpl"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="schemaQualified" value="http://ws.momarious.com,http://model.momarious.com"/>
+  <ns1:parameter name="wsdlServicePort" value="GestionDesNotesServiceImpl"/>
+  <ns1:parameter name="className" value="com.momarious.ws.GestionDesNotesServiceImpl"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ws.momarious.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="GestionDesNotesServiceImplService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns12:Classe" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.momarious.model.Classe" xmlns:ns12="http://model.momarious.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns13:Etudiant" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.momarious.model.Etudiant" xmlns:ns13="http://model.momarious.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns14:Evaluation" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.momarious.model.Evaluation" xmlns:ns14="http://model.momarious.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns15:Matiere" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.momarious.model.Matiere" xmlns:ns15="http://model.momarious.com"/>
+  <ns1:arrayMapping innerType="ns17:Evaluation" languageSpecificType="java:com.momarious.model.Evaluation[]" qname="ns16:ArrayOf_tns1_Evaluation" xmlns:ns16="http://ws.momarious.com" xmlns:ns17="http://model.momarious.com"/>
+ </ns1:service>
+ <ns1:service name="EtudiantServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+  <ns1:operation name="login" qname="ns18:login" returnQName="ns18:loginReturn" returnType="xsd:boolean" soapAction="" xmlns:ns18="http://ws.momarious.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns18:email" type="xsd:string"/>
+   <ns1:parameter qname="ns18:password" type="xsd:string"/>
+  </ns1:operation>
+  <ns1:operation name="getListEtudiants" qname="ns19:getListEtudiants" returnQName="ns19:getListEtudiantsReturn" returnType="ns20:Etudiant" soapAction="" xmlns:ns19="http://ws.momarious.com" xmlns:ns20="http://model.momarious.com">
+   <ns1:parameter qname="ns19:codeClasse" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getListEvaluationsByEtudAndMat" qname="ns21:getListEvaluationsByEtudAndMat" returnQName="ns21:getListEvaluationsByEtudAndMatReturn" returnType="ns22:Evaluation" soapAction="" xmlns:ns21="http://ws.momarious.com" xmlns:ns22="http://model.momarious.com">
+   <ns1:parameter qname="ns21:codeMat" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns21:codeEtud" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getListMatieresByEtud" qname="ns23:getListMatieresByEtud" returnQName="ns23:getListMatieresByEtudReturn" returnType="ns24:Matiere" soapAction="" xmlns:ns23="http://ws.momarious.com" xmlns:ns24="http://model.momarious.com">
+   <ns1:parameter qname="ns23:codeEtud" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getEtudiantByName" qname="ns25:getEtudiantByName" returnQName="ns25:getEtudiantByNameReturn" returnType="ns26:Etudiant" soapAction="" xmlns:ns25="http://ws.momarious.com" xmlns:ns26="http://model.momarious.com">
+   <ns1:parameter qname="ns25:nom" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns25:prenom" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="getMatiereByEtudAndMat" qname="ns27:getMatiereByEtudAndMat" returnQName="ns27:getMatiereByEtudAndMatReturn" returnType="ns28:Matiere" soapAction="" xmlns:ns27="http://ws.momarious.com" xmlns:ns28="http://model.momarious.com">
+   <ns1:parameter qname="ns27:codeEtud" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns27:codeMat" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:parameter name="allowedMethods" value="getListMatieresByEtud getListEtudiants getEtudiantByName login getListEvaluationsByEtudAndMat getMatiereByEtudAndMat"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="EtudiantServiceImpl"/>
+  <ns1:parameter name="className" value="com.momarious.ws.EtudiantServiceImpl"/>
+  <ns1:parameter name="wsdlServicePort" value="EtudiantServiceImpl"/>
+  <ns1:parameter name="schemaQualified" value="http://ws.momarious.com,http://model.momarious.com"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://ws.momarious.com"/>
+  <ns1:parameter name="wsdlServiceElement" value="EtudiantServiceImplService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns29:Classe" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.momarious.model.Classe" xmlns:ns29="http://model.momarious.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns30:Etudiant" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.momarious.model.Etudiant" xmlns:ns30="http://model.momarious.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns31:Evaluation" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.momarious.model.Evaluation" xmlns:ns31="http://model.momarious.com"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns32:Matiere" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.momarious.model.Matiere" xmlns:ns32="http://model.momarious.com"/>
+  <ns1:arrayMapping innerType="ns34:Evaluation" languageSpecificType="java:com.momarious.model.Evaluation[]" qname="ns33:ArrayOf_tns1_Evaluation" xmlns:ns33="http://ws.momarious.com" xmlns:ns34="http://model.momarious.com"/>
+ </ns1:service>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>
