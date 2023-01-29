@@ -5,13 +5,14 @@ A Java web service built using Maven and the MySQL Connector.
 This Java web service is a simple project management tool that allows you to manage notes for your projects. The project uses Maven for build and dependency management, and the MySQL Connector for database connectivity. The application is packaged as a WAR file for deployment to a servlet container.
 
 ## Prerequisites
-Java 8 or higher
-Maven
-MySQL database
+- Java 8 or higher
+- Maven
+- MySQL database
 
 ## Dependencies
 The project has the following dependency:
 
+```
 - MySQL Connector: mysql-connector-java:5.1.23
 
 ## Build
@@ -25,10 +26,6 @@ This will compile the source code, run tests (if any), and package the applicati
 To deploy the application, copy the WAR file to the webapps directory of a servlet container, such as Apache Tomcat. The application can then be accessed at the following URL:
 
 javascript
-Copy code
 http://localhost:8080/GestionDesNotes
 Configuration
 The database connection properties (such as the URL, username, and password) are typically stored in a configuration file and loaded at runtime.
-
-Notes
-This is just a sample project and is not meant for production use. It is only meant to provide an example of a Java web service using Maven and the MySQL Connector.
